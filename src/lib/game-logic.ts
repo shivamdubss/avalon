@@ -29,7 +29,12 @@ export class GameLogicError extends Error {
   }
 }
 
-export function createLobbyState(code: string, hostName: string, sessionId: string, now = Date.now()) {
+export function createLobbyState(
+  code: string,
+  hostName: string,
+  sessionId: string,
+  now = Date.now()
+): GameRoomState {
   const host = createPlayerState(hostName, sessionId, now);
 
   return {
@@ -467,6 +472,11 @@ export function applyBlockerExpiry(room: GameRoomState, now = Date.now()) {
 
   const next = cloneRoom(room);
   const blocker = next.blocker;
+
+  if (!blocker) {
+    return next;
+  }
+
   next.blocker = undefined;
 
   if (blocker.phase === "team-vote" && next.phase === "team-vote") {

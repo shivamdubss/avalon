@@ -26,7 +26,12 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -38,4 +43,3 @@
     "node_modules"
   ]
 }
-

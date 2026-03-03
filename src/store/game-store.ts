@@ -42,17 +42,31 @@ interface GameStore {
   reset: () => void;
 }
 
-const initialState = {
+type GameStoreState = Pick<
+  GameStore,
+  | "room"
+  | "you"
+  | "connectionStatus"
+  | "notices"
+  | "lastError"
+  | "roleCardRevealed"
+  | "privateIntelOpen"
+  | "pendingTeamSelection"
+  | "forceCaptionsOnly"
+  | "activeNarration"
+>;
+
+const initialState: GameStoreState = {
   room: null,
   you: null,
-  connectionStatus: "idle" as ConnectionStatus,
-  notices: [] as NoticeItem[],
-  lastError: null as { code: string; message: string } | null,
+  connectionStatus: "idle",
+  notices: [],
+  lastError: null,
   roleCardRevealed: false,
   privateIntelOpen: false,
-  pendingTeamSelection: [] as string[],
+  pendingTeamSelection: [],
   forceCaptionsOnly: false,
-  activeNarration: null as NarrationState | null
+  activeNarration: null
 };
 
 export const useGameStore = create<GameStore>((set) => ({

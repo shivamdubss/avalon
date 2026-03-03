@@ -55,7 +55,9 @@ describe("quest flow", () => {
 
     for (let questNumber = 0; questNumber < 3; questNumber += 1) {
       room.phase = "team-building";
-      room = proposeTeam(room, room.players[room.leaderIndex].playerId, room.players.slice(0, 2).map((player) => player.playerId));
+      const teamSize = room.quests[room.currentQuestIndex].teamSize;
+      const questTeam = room.players.slice(0, teamSize).map((player) => player.playerId);
+      room = proposeTeam(room, room.players[room.leaderIndex].playerId, questTeam);
       room = submitTeamVote(room, room.players[0].playerId, true);
       room = submitTeamVote(room, room.players[1].playerId, true);
       room = submitTeamVote(room, room.players[2].playerId, true);
@@ -63,7 +65,7 @@ describe("quest flow", () => {
       room = submitTeamVote(room, room.players[4].playerId, true);
       room = advanceAfterTeamVoteResults(room);
 
-      for (const player of room.players.slice(0, 2)) {
+      for (const player of room.players.slice(0, teamSize)) {
         room = submitQuestVote(room, player.playerId, "success");
       }
 

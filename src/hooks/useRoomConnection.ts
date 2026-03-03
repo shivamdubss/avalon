@@ -15,6 +15,8 @@ export function useRoomConnection(roomCode: string, joinIntent: PendingJoinInten
   const pushNotice = useGameStore((state) => state.pushNotice);
   const setError = useGameStore((state) => state.setError);
   const setActiveNarration = useGameStore((state) => state.setActiveNarration);
+  const protocol =
+    process.env.NEXT_PUBLIC_PARTYKIT_PROTOCOL === "wss" ? "wss" : "ws";
 
   const connectionConfig = useMemo(() => {
     if (!joinIntent) {
@@ -50,7 +52,7 @@ export function useRoomConnection(roomCode: string, joinIntent: PendingJoinInten
 
     const socket = new PartySocket({
       host: process.env.NEXT_PUBLIC_PARTYKIT_HOST ?? "127.0.0.1:1999",
-      protocol: process.env.NEXT_PUBLIC_PARTYKIT_PROTOCOL ?? "ws",
+      protocol,
       room: roomCode,
       party: "game"
     });
@@ -120,7 +122,8 @@ export function useRoomConnection(roomCode: string, joinIntent: PendingJoinInten
     roomCode,
     setActiveNarration,
     setConnectionStatus,
-    setError
+    setError,
+    protocol
   ]);
 
   function sendMessage(message: ClientMessage) {

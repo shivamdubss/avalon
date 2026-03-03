@@ -2,6 +2,7 @@ import { describe, expect, it } from "vitest";
 
 import { buildRoleDeck, deriveSecretKnowledge, validateRoleConfig } from "@/lib/roles";
 import { createLobbyState, startGame } from "@/lib/game-logic";
+import type { GameRoomState } from "@/lib/types";
 
 describe("role validation", () => {
   it("rejects too many optional evil roles at five players", () => {
@@ -34,7 +35,7 @@ describe("role validation", () => {
 
 describe("secret knowledge", () => {
   it("keeps Mordred hidden from Merlin", () => {
-    let room = createLobbyState("ABCDE", "Host", "s1");
+    let room: GameRoomState = createLobbyState("ABCDE", "Host", "s1");
     room = {
       ...room,
       players: [
@@ -70,4 +71,3 @@ describe("secret knowledge", () => {
     expect(knowledge.some((item) => item.playerIds?.includes(mordred!.playerId))).toBe(false);
   });
 });
-

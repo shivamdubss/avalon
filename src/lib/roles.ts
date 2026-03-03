@@ -144,7 +144,7 @@ export function deriveSecretKnowledge(room: GameRoomState, playerId: string): Se
     case "mordred":
     case "minion": {
       const visibleAllies = evilExceptOberon.filter((entry) => entry.playerId !== player.playerId);
-      const notes = visibleAllies.map((entry) => ({
+      const notes: SecretKnowledgeItem[] = visibleAllies.map((entry) => ({
         kind: "player" as const,
         label: `${entry.name} is allied with evil.`,
         playerIds: [entry.playerId]

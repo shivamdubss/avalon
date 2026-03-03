@@ -10,8 +10,8 @@
   --color-royal: #77a6ff;
   --color-gild: #d8b66d;
   --color-slate: #1c2946;
-  --font-display: "Cormorant Garamond", serif;
-  --font-body: "Spectral", serif;
+  --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Baskerville", Georgia, serif;
+  --font-body: "Baskerville", "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }
 
 * {
@@ -68,4 +68,3 @@ img {
     overscroll-behavior-y: none;
   }
 }
-
