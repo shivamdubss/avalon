@@ -1,0 +1,6 @@
+{
+  "name": "avalon",
+  "main": "party/game.ts",
+  "compatibilityDate": "2024-12-01"
+}
+
