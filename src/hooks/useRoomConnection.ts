@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useRef } from "react";
 import PartySocket from "partysocket";
 
+import { resolvePartyKitSocketOptions } from "@/lib/party";
 import { createSessionId, readRoomSession, writeRoomSession } from "@/lib/session";
 import type { ClientMessage, PendingJoinIntent, ServerMessage } from "@/lib/types";
 import { useGameStore } from "@/store/game-store";
@@ -15,8 +16,20 @@ export function useRoomConnection(roomCode: string, joinIntent: PendingJoinInten
   const pushNotice = useGameStore((state) => state.pushNotice);
   const setError = useGameStore((state) => state.setError);
   const setActiveNarration = useGameStore((state) => state.setActiveNarration);
-  const protocol =
-    process.env.NEXT_PUBLIC_PARTYKIT_PROTOCOL === "wss" ? "wss" : "ws";
+  const socketOptions = useMemo(
+    () =>
+      resolvePartyKitSocketOptions({
+        envHost: process.env.NEXT_PUBLIC_PARTYKIT_HOST,
+        envProtocol: process.env.NEXT_PUBLIC_PARTYKIT_PROTOCOL,
+        location: typeof window === "undefined" ? undefined : window.location
+      }),
+    []
+  );
+  const isLocalRoomServer =
+    socketOptions.host.startsWith("127.0.0.1") ||
+    socketOptions.host.startsWith("localhost") ||
+    socketOptions.host.startsWith("::1") ||
+    socketOptions.host.startsWith("[::1]");
 
   const connectionConfig = useMemo(() => {
     if (!joinIntent) {
@@ -51,8 +64,7 @@ export function useRoomConnection(roomCode: string, joinIntent: PendingJoinInten
     setConnectionStatus("connecting");
 
     const socket = new PartySocket({
-      host: process.env.NEXT_PUBLIC_PARTYKIT_HOST ?? "127.0.0.1:1999",
-      protocol,
+      ...socketOptions,
       room: roomCode,
       party: "game"
     });
@@ -106,7 +118,12 @@ export function useRoomConnection(roomCode: string, joinIntent: PendingJoinInten
 
     socket.addEventListener("error", () => {
       setConnectionStatus("error");
-      setError({ code: "SOCKET_ERROR", message: "The connection to the room server failed." });
+      setError({
+        code: "SOCKET_ERROR",
+        message: isLocalRoomServer
+          ? `The connection to the room server failed (${socketOptions.host}). Start it with \`npm run dev\` or \`npm run dev:party\`.`
+          : `The connection to the room server failed (${socketOptions.host}).`
+      });
     });
 
     return () => {
@@ -118,12 +135,13 @@ export function useRoomConnection(roomCode: string, joinIntent: PendingJoinInten
     applySnapshot,
     connectionConfig,
     joinIntent,
+    isLocalRoomServer,
     pushNotice,
     roomCode,
+    socketOptions,
     setActiveNarration,
     setConnectionStatus,
-    setError,
-    protocol
+    setError
   ]);
 
   function sendMessage(message: ClientMessage) {

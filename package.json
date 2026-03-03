@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:web": "next dev",
+    "dev": "node scripts/dev.mjs",
+    "dev:web": "next dev -H 0.0.0.0",
     "dev:party": "partykit dev party/game.ts --port 1999",
     "build": "next build",
     "lint": "next lint",

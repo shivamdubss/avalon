@@ -42,7 +42,7 @@ export function CreateJoinCard() {
           <button
             key={entry}
             className={`flex-1 rounded-xl px-3 py-2 text-sm font-semibold transition ${
-              mode === entry ? "bg-gild text-[#101521]" : "text-mist"
+              mode === entry ? "bg-gild text-ink" : "text-parchment/78 hover:text-parchment"
             }`}
             onClick={() => setMode(entry)}
             type="button"
@@ -54,11 +54,11 @@ export function CreateJoinCard() {
 
       <div className="space-y-4">
         <label className="block">
-          <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-mist/80">
+          <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-parchment/78">
             Display Name
           </span>
           <input
-            className="h-12 w-full rounded-xl border border-white/10 bg-slate/60 px-4 text-parchment outline-none transition focus:border-gild"
+            className="h-12 w-full rounded-xl border border-gild/35 bg-slate/60 px-4 text-parchment caret-gild outline-none transition placeholder:text-mist/55 focus:border-gild focus:bg-slate/75"
             data-testid="player-name-input"
             maxLength={24}
             onChange={(event) => setName(event.target.value)}
@@ -69,11 +69,11 @@ export function CreateJoinCard() {
 
         {mode === "join" ? (
           <label className="block">
-            <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-mist/80">
+            <span className="mb-2 block text-xs font-semibold uppercase tracking-[0.18em] text-parchment/78">
               Room Code
             </span>
             <input
-              className="h-12 w-full rounded-xl border border-white/10 bg-slate/60 px-4 font-mono text-lg uppercase tracking-[0.24em] text-parchment outline-none transition focus:border-gild"
+              className="h-12 w-full rounded-xl border border-gild/35 bg-slate/60 px-4 font-mono text-lg uppercase tracking-[0.24em] text-parchment caret-gild outline-none transition placeholder:text-mist/55 focus:border-gild focus:bg-slate/75"
               data-testid="room-code-input"
               onChange={(event) => setRoomCode(event.target.value)}
               placeholder="A4L0N"
@@ -89,4 +89,3 @@ export function CreateJoinCard() {
     </Card>
   );
 }
-

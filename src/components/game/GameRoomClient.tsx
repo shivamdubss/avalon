@@ -145,7 +145,7 @@ export function GameRoomClient({ roomCode }: { roomCode: string }) {
             <h1 className="font-display text-4xl text-parchment">Enter room {normalizedCode}</h1>
           </div>
           <input
-            className="h-12 w-full rounded-xl border border-white/10 bg-slate/60 px-4 text-parchment outline-none transition focus:border-gild"
+            className="h-12 w-full rounded-xl border border-gild/35 bg-slate/60 px-4 text-parchment caret-gild outline-none transition placeholder:text-mist/55 focus:border-gild focus:bg-slate/75"
             onChange={(event) => setDirectName(event.target.value)}
             placeholder="Choose a display name"
             value={directName}

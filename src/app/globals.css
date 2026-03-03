@@ -3,13 +3,20 @@
 @tailwind utilities;
 
 :root {
-  --color-ink: #090f1d;
-  --color-mist: #bfc7d9;
-  --color-parchment: #f3ecde;
-  --color-ember: #db6467;
-  --color-royal: #77a6ff;
-  --color-gild: #d8b66d;
-  --color-slate: #1c2946;
+  --color-ink-rgb: 9 15 29;
+  --color-mist-rgb: 191 199 217;
+  --color-parchment-rgb: 243 236 222;
+  --color-ember-rgb: 219 100 103;
+  --color-royal-rgb: 119 166 255;
+  --color-gild-rgb: 216 182 109;
+  --color-slate-rgb: 28 41 70;
+  --color-ink: rgb(var(--color-ink-rgb));
+  --color-mist: rgb(var(--color-mist-rgb));
+  --color-parchment: rgb(var(--color-parchment-rgb));
+  --color-ember: rgb(var(--color-ember-rgb));
+  --color-royal: rgb(var(--color-royal-rgb));
+  --color-gild: rgb(var(--color-gild-rgb));
+  --color-slate: rgb(var(--color-slate-rgb));
   --font-display: "Iowan Old Style", "Palatino Linotype", "Book Antiqua", "Baskerville", Georgia, serif;
   --font-body: "Baskerville", "Palatino Linotype", "Book Antiqua", Georgia, serif;
 }

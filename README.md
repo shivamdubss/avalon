@@ -15,12 +15,13 @@ Mobile-first, real-time web implementation of *The Resistance: Avalon* using Nex
 
 1. Install dependencies with your preferred npm-compatible package manager.
 2. Copy `.env.example` to `.env.local` and adjust the PartyKit host if needed.
-3. Run the web app and PartyKit server in separate terminals:
+3. Start the development servers:
 
 ```bash
-npm run dev:web
-npm run dev:party
+npm run dev
 ```
+
+If you need them separately, `npm run dev:web` starts Next.js and `npm run dev:party` starts PartyKit.
 
 The original implementation plan targeted `pnpm`, but the scripts are plain npm scripts and work with `npm`, `pnpm`, or `yarn`.
 
@@ -62,4 +63,3 @@ npm run test:e2e
 - The room server is purely in-memory.
 - Placeholder role art is used by default.
 - Development in this workspace could not install dependencies because outbound package registry access was unavailable during implementation.
-

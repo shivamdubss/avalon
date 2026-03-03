@@ -11,13 +11,13 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "var(--color-ink)",
-        mist: "var(--color-mist)",
-        parchment: "var(--color-parchment)",
-        ember: "var(--color-ember)",
-        royal: "var(--color-royal)",
-        gild: "var(--color-gild)",
-        slate: "var(--color-slate)"
+        ink: "rgb(var(--color-ink-rgb) / <alpha-value>)",
+        mist: "rgb(var(--color-mist-rgb) / <alpha-value>)",
+        parchment: "rgb(var(--color-parchment-rgb) / <alpha-value>)",
+        ember: "rgb(var(--color-ember-rgb) / <alpha-value>)",
+        royal: "rgb(var(--color-royal-rgb) / <alpha-value>)",
+        gild: "rgb(var(--color-gild-rgb) / <alpha-value>)",
+        slate: "rgb(var(--color-slate-rgb) / <alpha-value>)"
       },
       fontFamily: {
         display: "var(--font-display)",
@@ -36,4 +36,3 @@ const config: Config = {
 };
 
 export default config;
-
